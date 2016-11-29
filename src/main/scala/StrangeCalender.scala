@@ -43,8 +43,8 @@ class StrangeCalender(f: StrangeCalenderFactory, y: Int, m: Int, d: Int) {
 
     // この年が閏年であるか
     val isLeapYear: Boolean =
-      y != 1 &&
-      (totalDiffDay % f.daysInMonth) < diffDayPerYear
+      ((totalDiffDay % f.daysInMonth) + diffDayPerYear) >= f.daysInMonth
+
     // 閏年じゃなかった場合は月の制限がやや厳しいのでチェック
     if (!isLeapYear) require(m <= (f.daysInYear / f.daysInMonth))
 
