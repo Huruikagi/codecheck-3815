@@ -57,7 +57,8 @@ class StrangeCalenderFactory(y: Int, m: Int, d: Int) {
     year > 0 &&
     month > 0 &&
     day > 0 &&
-    day <= daysInMonth
+    day <= daysInMonth &&  // ひと月30日なのに50日とかになっていないかチェック
+    month < ((daysInYear / daysInMonth) + 1) // 1年が12ヵ月なのに15月とかになっていないかチェック
   }
 
 }
