@@ -41,9 +41,18 @@ class StrangeCalender(f: StrangeCalenderFactory, y: Int, m: Int, d: Int) {
     // この年までに閏月が何回あったか
     val leapMonthCount: Int = totalDiffDay / f.daysInMonth
 
+    // この年が閏年であるか
+    val isLeapYear: Boolean =
+      (totalDiffDay % f.daysInMonth) < diffDayPerYear
+    // 閏年じゃなかった場合は月の制限がやや厳しいのでチェック
+    if (!isLeapYear) require(y < (f.daysInYear / f.daysInMonth))
+
     // 1年1月1日を0日目として、何日目か
     val totalDay: Int =
-      (f.daysInYear * (y - 1)) + (f.daysInMonth * (m - 1)) + (d - 1) + (f.daysInMonth * leapMonthCount)
+      ((f.daysInYear - diffDayPerYear) * (y - 1)) +
+        (f.daysInMonth * (m - 1)) +
+        (d - 1) +
+        (f.daysInMonth * leapMonthCount)
 
     // 数値で表した曜日
     val dow: Int = totalDay % f.daysInWeek
