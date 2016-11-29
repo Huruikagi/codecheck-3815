@@ -53,6 +53,8 @@ class StrangeCalenderFactory(y: Int, m: Int, d: Int) {
   }
 
 
+  // 存在する年月日かどうかを簡易にチェックする
+  // 閏月かどうかはStrangeCalenderの方でチェックしているのでそっちで
   private def isValidDate(year: Int, month: Int, day: Int): Boolean = {
     year > 0 &&
     month > 0 &&
